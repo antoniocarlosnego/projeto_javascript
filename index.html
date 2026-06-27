@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager - Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar com Categorias -->
+        <aside class="sidebar">
+            <header class="sidebar-header">
+                <h1>Minhas Listas</h1>
+                <button class="btn-new-category" id="btnNewCategory" aria-label="Criar nova categoria">
+                    <span class="icon">+</span>
+                </button>
+            </header>
+            <ul class="categories-list" id="categoriesList"></ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-area">
+                <!-- Header da Categoria Selecionada -->
+                <header class="category-header">
+                    <h2 id="categoryTitle">Selecione uma categoria</h2>
+                    <p id="categoryInfo" class="category-info"></p>
+                </header>
+
+                <!-- Seção de Entrada de Tarefa -->
+                <section class="task-input-section">
+                    <div class="input-group">
+                        <input
+                            type="text"
+                            id="taskInput"
+                            class="task-input"
+                            placeholder="Adicionar tarefa..."
+                            disabled
+                        />
+                        <button
+                            id="btnAddTask"
+                            class="btn-add-task"
+                            aria-label="Adicionar tarefa"
+                            disabled
+                        >
+                            Adicionar
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Lista de Tarefas -->
+                <section class="tasks-section">
+                    <div id="tasksContainer" class="tasks-container">
+                        <div class="empty-state">
+                            <p>📋 Selecione uma categoria para começar</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para Criar Categoria -->
+    <div id="categoryModal" class="modal hidden">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h3>Nova Categoria</h3>
+                <button class="modal-close" id="btnCloseModal" aria-label="Fechar">&times;</button>
+            </header>
+            <form id="categoryForm" class="modal-body">
+                <div class="form-group">
+                    <label for="categoryName">Nome da Categoria</label>
+                    <input
+                        type="text"
+                        id="categoryName"
+                        class="form-input"
+                        placeholder="Ex: Trabalho, Estudos, Pessoal"
+                        required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="categoryColor">Cor (opcional)</label>
+                    <div class="color-picker">
+                        <input type="color" id="categoryColor" class="form-input color-input" value="#4285F4" />
+                        <span id="colorPreview" class="color-preview"></span>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="btnCancelCategory">Cancelar</button>
+                    <button type="submit" class="btn-primary">Criar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Confirmar Exclusão -->
+    <div id="deleteModal" class="modal hidden">
+        <div class="modal-content modal-small">
+            <header class="modal-header">
+                <h3>Confirmar Exclusão</h3>
+            </header>
+            <div class="modal-body">
+                <p id="deleteMessage"></p>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" id="btnCancelDelete">Cancelar</button>
+                <button type="button" class="btn-danger" id="btnConfirmDelete">Deletar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="utils/uuid.js"></script>
+    <script src="services/storageService.js"></script>
+    <script src="models/appState.js"></script>
+    <script src="controllers/categoryController.js"></script>
+    <script src="controllers/taskController.js"></script>
+    <script src="views/categoryView.js"></script>
+    <script src="views/taskView.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
